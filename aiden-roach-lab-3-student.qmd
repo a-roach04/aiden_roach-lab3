@@ -39,7 +39,7 @@ In the code chunk below, load in the packages necessary for your analysis. You s
 
 ```{r}
 #| label: setup
-
+library(tidyverse)
 ```
 
 # Part 2: Data Context
@@ -72,14 +72,16 @@ We are going to use the `read_csv()` function to load in the `surveys.csv` datas
 #| label: load-data
 
 surveys <- read_csv("data/surveys.csv")
-#glimpse(surveys)
+glimpse(surveys)
 ```
 
 **1. What are the dimensions (# of rows and columns) of these data?**
+> There are 30,463 rows and 15 columns in this dataset.
 
 <!-- Run the commented code in the load-data chunk to address this question!  -->
 
 **2. What are the data types of the variables in this dataset?**
+> There are integers, dates, and strings
 
 <!-- Run the commented code in the load-data chunk to address this question!  -->
 
@@ -106,7 +108,16 @@ Let's get started!
 
 ```{r}
 #| label: scatterplot
-
+ggplot(data = surveys,
+       mapping = aes(x = weight,
+                     y = hindfoot_length,
+                     alpha = 200)) +
+  geom_point() + 
+  facet_wrap(~species) + 
+  labs(x = "Weight of Animal (g)",
+       y = "",
+         title = "Relationship of an Animal's Weight and Their Hindfoot Length Split by Species",
+         subtitle = "Hindfoot Length (mm)")
 ```
 
 We can see there are **a lot** of points plotted on top of each other. Let's try and modify this plot to extract more information from it.
